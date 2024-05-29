@@ -1,0 +1,17 @@
+.root {
+    flex: none;
+    width: 2.5rem;
+    height: 2.5rem;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 0.5rem;
+
+    background-color: var(--accent-background);
+}
+
+.root[data-state='on'] {
+    background-color: var(--blue);
+    color: var(--white);
+}
