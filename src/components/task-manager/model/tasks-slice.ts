@@ -11,9 +11,25 @@ export const tasksSlice = createSlice({
         setTaskList: (state, action: PayloadAction<Task[]>) => {
             state.taskList = action.payload;
         },
-        createTask: (state, action: PayloadAction<Task>) => {}
+        createTask: (state, action: PayloadAction<Pick<Task, 'name' | 'text'>>) => {
+            const { name, text } = action.payload;
+
+            state.taskList.push({
+                id: crypto.randomUUID(),
+                name,
+                text,
+                creator: 'foo@bar.com',
+                isCompleted: false
+            });
+        },
+        editTask: (state, action: PayloadAction<Partial<Task>>) => {
+            const task = state.taskList.find((task) => task.id === action.payload.id);
+            if (task) {
+                Object.assign(task, action.payload);
+            }
+        }
     }
 });
 
-export const { setTaskList, createTask } = tasksSlice.actions;
+export const { setTaskList, createTask, editTask } = tasksSlice.actions;
 export default tasksSlice.reducer;

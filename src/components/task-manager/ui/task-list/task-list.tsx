@@ -1,11 +1,13 @@
 'use client';
 
-import { useSelector } from 'react-redux';
+import { memo } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { Task } from '@/components/task-manager/model/task-types';
 import { RootState } from '@/lib/config/store';
 import UIToggle from '@/shared/ui/toggle/toggle';
 
+import { editTask } from '../../model/tasks-slice';
 import styles from './task-list.module.css';
 
 export default function TaskList() {
@@ -20,7 +22,10 @@ export default function TaskList() {
     );
 }
 
-function TaskItem({ name, text, creator, isCompleted }: Task) {
+const TaskItem = memo(({ id, name, text, creator, isCompleted }: Task) => {
+    const dispatch = useDispatch();
+    const handleToggle = () => dispatch(editTask({ id, isCompleted: !isCompleted }));
+
     return (
         <li className={styles.item} data-completed={isCompleted}>
             <div className={styles.item_text}>
@@ -28,7 +33,9 @@ function TaskItem({ name, text, creator, isCompleted }: Task) {
                 <p className={styles.item_text}>{text}</p>
                 <small className={styles.item_creator}>{creator}</small>
             </div>
-            <UIToggle isChecked={isCompleted} />
+            <div onClick={handleToggle}>
+                <UIToggle isChecked={isCompleted} />
+            </div>
         </li>
     );
-}
+});

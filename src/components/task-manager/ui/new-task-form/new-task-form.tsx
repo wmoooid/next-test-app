@@ -1,13 +1,26 @@
 'use client';
 
 import * as Form from '@radix-ui/react-form';
+import { useDispatch } from 'react-redux';
 
+import { createTask } from '../../model/tasks-slice';
 import styles from './new-task-form.module.css';
 
 export default function NewTaskForm() {
+    const dispatch = useDispatch();
+    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+
+        const formData = new FormData(event.currentTarget);
+        const name = formData.get('task-name') as string;
+        const text = formData.get('task-text') as string;
+
+        if (name && text) dispatch(createTask({ name, text }));
+    };
+
     return (
         <div className={styles.wrapper}>
-            <Form.Root className={styles.form_root}>
+            <Form.Root onSubmit={handleSubmit} className={styles.form_root}>
                 <Form.Field className={styles.form_field} name='new-task'>
                     <div className={styles.input_header}>
                         <Form.Label className={styles.input_label}>Create new task</Form.Label>
