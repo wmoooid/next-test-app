@@ -1,36 +1,19 @@
+'use client';
+
+import { useSelector } from 'react-redux';
+
+import { Task } from '@/components/task-manager/model/task-types';
+import { RootState } from '@/lib/config/store';
 import UIToggle from '@/shared/ui/toggle/toggle';
 
-import { Task } from '../../types/task-types';
 import styles from './task-list.module.css';
 
-const MOCK_TASK_LIST: Array<Task> = [
-    {
-        id: '1',
-        name: 'Помыть кота',
-        creator: 'foo@bar.com',
-        text: 'Срочно помыть кота, пока не стало слишком поздно',
-        isCompleted: false
-    },
-    {
-        id: '2',
-        name: 'Поесть',
-        creator: 'foo@bar.com',
-        text: 'Купить еды, приготовить и поесть',
-        isCompleted: true
-    },
-    {
-        id: '3',
-        name: 'Поспать',
-        creator: 'foo@bar.com',
-        text: 'Спать очень важно',
-        isCompleted: false
-    }
-];
-
 export default function TaskList() {
+    const { taskList } = useSelector((state: RootState) => state.taskList);
+
     return (
         <ul className={styles.list}>
-            {MOCK_TASK_LIST.map((task) => (
+            {taskList.map((task) => (
                 <TaskItem key={task.id} {...task} />
             ))}
         </ul>
