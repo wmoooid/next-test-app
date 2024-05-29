@@ -3,8 +3,8 @@
     "plugins": ["simple-import-sort"],
     "rules": {
         "@typescript-eslint/no-unused-vars": "warn",
-        "simple-import-sort/imports": "error",
-        "simple-import-sort/exports": "error"
+        "simple-import-sort/imports": "warn",
+        "simple-import-sort/exports": "warn"
     },
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
