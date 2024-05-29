@@ -14,13 +14,9 @@
     border-bottom: 1px solid var(--accent-background);
 }
 
-.item[data-completed='true'] {
-    order: 1;
-    opacity: 0.5;
-}
-
-.item[data-completed='true']:hover {
-    opacity: 0.8;
+.item[data-completed='true'] .item_text {
+    /* order: 1; */
+    opacity: 0.35;
 }
 
 .item_text {
