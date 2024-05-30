@@ -56,6 +56,8 @@ main,
 
     background-color: var(--background-color);
     color: var(--primary-color);
+
+    scrollbar-gutter: stable;
 }
 
 a {
@@ -95,14 +97,16 @@ li {
 
 input,
 textarea {
-    background-color: var(--accent-background);
-    border: none;
+    flex-grow: 1;
+
     padding: 0.75rem 1rem;
-    border-radius: 0.5rem;
-    width: 0;
-    min-width: 100%;
+    min-width: 0;
     max-width: 100%;
     min-height: 3rem;
+
+    border: none;
+    border-radius: 0.5rem;
+    background-color: var(--accent-background);
 }
 
 input:hover,
@@ -120,7 +124,7 @@ textarea:hover {
 .button {
     display: grid;
     place-items: center;
-    padding: 0.25rem 1rem;
+    padding: 0.25rem 0.85rem;
     border-radius: 0.5rem;
     height: 2.5rem;
 }

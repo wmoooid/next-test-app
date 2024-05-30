@@ -5,7 +5,7 @@ import { Inter } from 'next/font/google';
 
 import Footer from '@/components/footer';
 import Header from '@/components/header';
-import { Task } from '@/components/task-manager/model/task-types';
+import { Task } from '@/components/task-manager/model/types';
 import StoreProvider from '@/lib/provider/store-provider';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -20,24 +20,27 @@ export const dynamic = 'force-dynamic';
 const MOCK_TASK_LIST: Array<Task> = [
     {
         id: '1',
-        name: 'Помыть кота',
-        creator: 'foo@bar.com',
-        text: 'Срочно помыть кота, пока не стало слишком поздно',
-        isCompleted: false
+        name: 'Покормить кота',
+        email: 'foo@bar.com',
+        text: 'Срочно покормить кота, пока не стало слишком поздно',
+        isCompleted: false,
+        isFiltered: false
     },
     {
         id: '2',
         name: 'Поесть',
-        creator: 'foo@bar.com',
+        email: 'fizz@buzz.com',
         text: 'Купить еды, приготовить и поесть',
-        isCompleted: true
+        isCompleted: true,
+        isFiltered: false
     },
     {
         id: '3',
         name: 'Поспать',
-        creator: 'foo@bar.com',
+        email: 'ivan@mail.ru',
         text: 'Спать очень важно',
-        isCompleted: false
+        isCompleted: false,
+        isFiltered: false
     }
 ];
 

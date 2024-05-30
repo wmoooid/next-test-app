@@ -1,11 +1,11 @@
-import NewTaskForm from '../new-task-form/new-task-form';
+import TaskFilter from '../task-filter/task-filter';
 import TaskList from '../task-list/task-list';
 import styles from './task-manager.module.css';
 
 export default function TaskManager() {
     return (
         <section className={styles.section}>
-            <NewTaskForm />
+            <TaskFilter />
             <TaskList />
         </section>
     );

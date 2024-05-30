@@ -1,11 +1,12 @@
 'use client';
 
-import { memo } from 'react';
+import { CheckIcon, Pencil2Icon } from '@radix-ui/react-icons';
+import { memo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { Task } from '@/components/task-manager/model/task-types';
+import { Task } from '@/components/task-manager/model/types';
 import { RootState } from '@/lib/config/store';
-import UIToggle from '@/shared/ui/toggle/toggle';
+import UICheckbox from '@/shared/ui/checkbox/checkbox';
 
 import { editTask } from '../../model/tasks-slice';
 import styles from './task-list.module.css';
@@ -22,20 +23,37 @@ export default function TaskList() {
     );
 }
 
-const TaskItem = memo(({ id, name, text, creator, isCompleted }: Task) => {
+const TaskItem = memo(({ id, name, text, email, isCompleted, isFiltered }: Task) => {
     const dispatch = useDispatch();
-    const handleToggle = () => dispatch(editTask({ id, isCompleted: !isCompleted }));
+    const [isEditing, setIsEditing] = useState(false);
+    const [newTaskText, setNewTaskText] = useState(text);
+
+    const handleToggle = () => {
+        if (!isEditing) return;
+        dispatch(editTask({ id, isCompleted: !isCompleted }));
+    };
+
+    const handleEditingClick = () => {
+        setIsEditing((prev) => !prev);
+
+        if (isEditing) dispatch(editTask({ id, text: newTaskText }));
+    };
+
+    if (isFiltered) return null;
 
     return (
         <li className={styles.item} data-completed={isCompleted}>
-            <div className={styles.item_text}>
-                <strong className={styles.item_heading}>{name}</strong>
-                <p className={styles.item_text}>{text}</p>
-                <small className={styles.item_creator}>{creator}</small>
+            <div className={styles.item_main}>
+                <div className={styles.item_header} onClick={handleToggle}>
+                    <UICheckbox isChecked={isCompleted} />
+                    <strong className={styles.item_heading}>{name}</strong>
+                </div>
+                {isEditing ? <textarea className={styles.input_text} value={newTaskText} onChange={(e) => setNewTaskText(e.target.value)}></textarea> : <p className={styles.item_text}>{text}</p>}
+                <small className={styles.item_creator}>{email}</small>
             </div>
-            <div onClick={handleToggle}>
-                <UIToggle isChecked={isCompleted} />
-            </div>
+            <button onClick={handleEditingClick} className='button button_accent'>
+                {isEditing ? <CheckIcon /> : <Pencil2Icon />}
+            </button>
         </li>
     );
 });

@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { Task } from './task-types';
+import { Task, TaskFilter } from './types';
 
 const initialState = { taskList: [] as Task[] };
 
@@ -11,14 +11,14 @@ export const tasksSlice = createSlice({
         setTaskList: (state, action: PayloadAction<Task[]>) => {
             state.taskList = action.payload;
         },
-        createTask: (state, action: PayloadAction<Pick<Task, 'name' | 'text'>>) => {
-            const { name, text } = action.payload;
+        createTask: (state, action: PayloadAction<Pick<Task, 'name' | 'text' | 'email'>>) => {
+            const { name, text, email } = action.payload;
 
-            state.taskList.push({
+            state.taskList.unshift({
                 id: crypto.randomUUID(),
                 name,
                 text,
-                creator: 'foo@bar.com',
+                email,
                 isCompleted: false
             });
         },
@@ -27,9 +27,26 @@ export const tasksSlice = createSlice({
             if (task) {
                 Object.assign(task, action.payload);
             }
+        },
+        filterTask: (state, action: PayloadAction<Partial<TaskFilter>>) => {
+            const { query, sort, completed } = action.payload;
+
+            state.taskList = state.taskList.map((task) => {
+                if (query) {
+                    if (!task.name.toLowerCase().includes(query.toLowerCase()) && !task.text.toLowerCase().includes(query.toLowerCase()) && !task.email.toLowerCase().includes(query.toLowerCase())) {
+                        return { ...task, isFiltered: true };
+                    }
+                }
+                if (completed) {
+                    if (task.isCompleted !== completed) {
+                        return { ...task, isFiltered: true };
+                    }
+                }
+                return { ...task, isFiltered: false };
+            });
         }
     }
 });
 
-export const { setTaskList, createTask, editTask } = tasksSlice.actions;
+export const { setTaskList, createTask, editTask, filterTask } = tasksSlice.actions;
 export default tasksSlice.reducer;
