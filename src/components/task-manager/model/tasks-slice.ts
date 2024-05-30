@@ -44,6 +44,14 @@ export const tasksSlice = createSlice({
                 }
                 return { ...task, isFiltered: false };
             });
+
+            state.taskList = state.taskList.sort((a, b) => {
+                if (sort) {
+                    return a.id > b.id ? -1 : 1;
+                } else {
+                    return a.id < b.id ? -1 : 1;
+                }
+            });
         }
     }
 });
