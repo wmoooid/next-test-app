@@ -1,19 +1,18 @@
 .root {
     flex: none;
-    height: 2.5rem;
-    min-width: 2.5rem;
+    width: 1.35rem;
+    height: 1.35rem;
+    padding: 0;
 
-    padding: 0.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: grid;
+    place-items: center;
 
     border-radius: 0.35rem;
 
     background-color: var(--accent-background);
 }
 
-.highlight[data-state='on'] {
+.root[data-state='on'] {
     background-color: var(--blue);
     color: var(--white);
 }

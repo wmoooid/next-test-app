@@ -1,18 +1,19 @@
 'use client';
 
-import { CheckIcon } from '@radix-ui/react-icons';
 import * as Toggle from '@radix-ui/react-toggle';
 
 import styles from './toggle.module.css';
 
 type UIToggleProps = {
-    isChecked: boolean;
+    children: React.ReactNode;
+    isPressed: boolean;
+    withHighlight?: boolean;
 };
 
-export default function UIToggle({ isChecked }: UIToggleProps) {
+export default function UIToggle({ children, isPressed, withHighlight }: UIToggleProps) {
     return (
-        <Toggle.Root pressed={isChecked} className={styles.root}>
-            {isChecked && <CheckIcon style={{ width: '1.25rem', height: '1.25rem' }} />}
+        <Toggle.Root pressed={isPressed} className={`${styles.root} ${withHighlight ? styles.highlight : ''}`}>
+            {children}
         </Toggle.Root>
     );
 }
