@@ -27,26 +27,32 @@ function NewTaskForm({ onSubmit }: { onSubmit: () => void }) {
     return (
         <div className={styles.wrapper}>
             <Form.Root onSubmit={handleSubmit} className={styles.form_root}>
-                <Form.Field className={styles.form_field} name='new-task'>
-                    <div className={styles.input_header}>
-                        <Form.Label className={styles.heading}>Создать новую задачу</Form.Label>
-                        <Form.Message className={styles.message_error} match='valueMissing'>
-                            Заполните все поля
-                        </Form.Message>
-                        <Form.Message className={styles.message_error} match='typeMismatch'>
-                            Введите корректный email
-                        </Form.Message>
-                    </div>
-                    <div style={{ display: 'flex', gap: '1rem' }}>
-                        <Form.Control asChild>
-                            <input placeholder='Название' name='task-name' className={styles.input} type='text' required />
-                        </Form.Control>
-                        <Form.Control asChild>
-                            <input placeholder='Email' name='task-email' className={styles.input} type='email' required />
-                        </Form.Control>
-                    </div>
+                <strong className={styles.heading}>Создать новую задачу</strong>
+
+                <Form.Field className={styles.form_field} name='task-name'>
+                    <Form.Message className={styles.message_error} match='tooShort'>
+                        Название должно быть длиннее 3 символов
+                    </Form.Message>
                     <Form.Control asChild>
-                        <textarea rows={5} placeholder='Начните писать...' name='task-text' className={styles.input} required />
+                        <input placeholder='Название' name='task-name' className={styles.input} type='text' required minLength={3} />
+                    </Form.Control>
+                </Form.Field>
+
+                <Form.Field className={styles.form_field} name='task-email'>
+                    <Form.Message className={styles.message_error} match='valueMissing'>
+                        Введите Email
+                    </Form.Message>
+                    <Form.Message className={styles.message_error} match='typeMismatch'>
+                        Введите корректный Email
+                    </Form.Message>
+                    <Form.Control asChild>
+                        <input placeholder='Email' name='task-email' className={styles.input} type='email' required />
+                    </Form.Control>
+                </Form.Field>
+
+                <Form.Field className={styles.form_field} name='task-email'>
+                    <Form.Control asChild>
+                        <textarea rows={5} placeholder='Начните писать...' name='task-text' className={styles.input} />
                     </Form.Control>
                 </Form.Field>
 
@@ -66,7 +72,9 @@ export default function NewTaskDialog() {
     return (
         <Dialog.Root open={open} onOpenChange={setOpen}>
             <Dialog.Trigger asChild>
-                <button className='button button_accent'>Создать задачу</button>
+                <button style={{ flexGrow: 1 }} className='button button_accent'>
+                    Создать задачу
+                </button>
             </Dialog.Trigger>
             <Dialog.Portal>
                 <Dialog.Overlay className={styles.dialog_overlay} />

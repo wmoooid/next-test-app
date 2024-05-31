@@ -5,15 +5,13 @@ import { memo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { Task } from '@/components/task-manager/model/types';
-import { RootState } from '@/lib/config/store';
+import { RootState } from '@/lib/redux/config/store';
 import UICheckbox from '@/shared/ui/checkbox/checkbox';
 
 import { editTask } from '../../model/tasks-slice';
 import styles from './task-list.module.css';
 
-export default function TaskList() {
-    const { taskList } = useSelector((state: RootState) => state.taskList);
-
+export default function TaskList({ taskList }: { taskList: Task[] }) {
     return (
         <ul className={styles.list}>
             {taskList.map((task) => (
@@ -24,6 +22,8 @@ export default function TaskList() {
 }
 
 const TaskItem = memo(({ id, name, text, email, isCompleted, isFiltered }: Task) => {
+    const { isAdmin } = useSelector((state: RootState) => state.userInfo);
+
     const dispatch = useDispatch();
     const [isEditing, setIsEditing] = useState(false);
     const [newTaskText, setNewTaskText] = useState(text);
@@ -51,9 +51,11 @@ const TaskItem = memo(({ id, name, text, email, isCompleted, isFiltered }: Task)
                 {isEditing ? <textarea className={styles.input_text} value={newTaskText} onChange={(e) => setNewTaskText(e.target.value)}></textarea> : <p className={styles.item_text}>{text}</p>}
                 <small className={styles.item_creator}>{email}</small>
             </div>
-            <button onClick={handleEditingClick} className='button button_accent'>
-                {isEditing ? <CheckIcon /> : <Pencil2Icon />}
-            </button>
+            {isAdmin && (
+                <button onClick={handleEditingClick} className='button button_accent'>
+                    {isEditing ? <CheckIcon /> : <Pencil2Icon />}
+                </button>
+            )}
         </li>
     );
 });

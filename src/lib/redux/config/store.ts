@@ -1,5 +1,6 @@
 import { configureStore, createListenerMiddleware } from '@reduxjs/toolkit';
 
+import userReducer from '@/app/model/user-slice';
 import filterReducer, { setFilter } from '@/components/task-manager/model/filter-slice';
 import tasksReducer, { filterTask } from '@/components/task-manager/model/tasks-slice';
 
@@ -18,7 +19,8 @@ export const makeStore = () => {
     return configureStore({
         reducer: {
             taskList: tasksReducer,
-            filterList: filterReducer
+            filterList: filterReducer,
+            userInfo: userReducer
         },
         middleware: (getDefaultMiddleware) => getDefaultMiddleware().prepend(listenerMiddleware.middleware)
     });

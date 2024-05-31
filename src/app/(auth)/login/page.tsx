@@ -1,9 +1,10 @@
 import LoginForm from '@/components/login-form';
+import { login } from '@/lib/session/actions';
 
-export default function LoginPage() {
+export default async function LoginPage() {
     return (
         <section style={{ flexGrow: 1, display: 'grid', placeItems: 'center', paddingBottom: '4rem' }}>
-            <LoginForm />
+            <LoginForm action={login} />
         </section>
     );
 }
