@@ -12,6 +12,8 @@ import { editTask } from '../../model/tasks-slice';
 import styles from './task-list.module.css';
 
 export default function TaskList({ taskList }: { taskList: Task[] }) {
+    if (!taskList) return null;
+
     return (
         <ul className={styles.list}>
             {taskList.map((task) => (

@@ -145,3 +145,9 @@ textarea:hover {
     align-self: stretch;
     background-color: var(--muted-color);
 }
+
+@media screen and (max-width: 560px) {
+    .container {
+        padding-inline: 1rem;
+    }
+}
