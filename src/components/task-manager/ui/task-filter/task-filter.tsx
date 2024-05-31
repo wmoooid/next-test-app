@@ -15,7 +15,7 @@ export default function TaskSearch() {
 
     return (
         <div className={styles.wrapper}>
-            <input value={query} onChange={(e) => dispatch(setFilter({ query: e.target.value }))} className={styles.input} type='text' placeholder='Поиск по задачам' />
+            <input value={query} onChange={(e) => dispatch(setFilter({ query: e.target.value }))} className={styles.input} type='text' placeholder='Поиск по задачам или email' />
             <div onClick={() => dispatch(setFilter({ sort: !sort }))}>
                 <UIToggle isPressed={sort}>{sort ? <PinTopIcon /> : <PinBottomIcon />}</UIToggle>
             </div>
