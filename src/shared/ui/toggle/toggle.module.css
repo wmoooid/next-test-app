@@ -13,6 +13,10 @@
     background-color: var(--accent-background);
 }
 
+.root:hover {
+    filter: brightness(0.9);
+}
+
 .highlight[data-state='on'] {
     background-color: var(--blue);
     color: var(--white);
