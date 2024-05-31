@@ -45,6 +45,9 @@ function NewTaskForm({ onSubmit }: { onSubmit: () => void }) {
                 </Form.Field>
 
                 <Form.Field className={styles.form_field} name='task-email'>
+                    <Form.Message className={styles.message_error} match='valueMissing'>
+                        Введите Email
+                    </Form.Message>
                     <Form.Message className={styles.message_error} match='typeMismatch'>
                         Введите корректный Email
                     </Form.Message>
