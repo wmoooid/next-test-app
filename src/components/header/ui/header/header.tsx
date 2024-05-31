@@ -1,4 +1,5 @@
-import { getSession } from '@/lib/session/actions';
+import { LOGOUT_ROUTE } from '@/shared/constants/routes';
+import { getSession } from '@/shared/lib/session/actions';
 
 import styles from './header.module.css';
 
@@ -15,7 +16,7 @@ export async function Header() {
 
                     {isLoggedIn && (
                         <div style={{ display: 'flex', gap: '1rem' }}>
-                            <a href='/logout' className='button button_accent'>
+                            <a href={LOGOUT_ROUTE} className='button button_accent'>
                                 Выйти
                             </a>
                         </div>

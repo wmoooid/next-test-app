@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { SessionData } from '@/lib/session/lib';
+import { SessionData } from '@/shared/lib/session/lib';
 
 const initialState: Partial<SessionData> = {
     email: '',

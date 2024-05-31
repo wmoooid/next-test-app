@@ -1,14 +1,15 @@
 import { redirect } from 'next/navigation';
 
 import LoginForm from '@/components/login-form';
-import { login } from '@/lib/session/actions';
-import { getSession } from '@/lib/session/actions';
+import { BASE_ROUTE } from '@/shared/constants/routes';
+import { login } from '@/shared/lib/session/actions';
+import { getSession } from '@/shared/lib/session/actions';
 
 export default async function LoginPage() {
     const session = await getSession();
 
     if (session.isLoggedIn) {
-        redirect('/');
+        redirect(BASE_ROUTE);
     }
 
     return (

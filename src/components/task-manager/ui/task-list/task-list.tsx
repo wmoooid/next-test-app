@@ -5,7 +5,7 @@ import { memo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { Task } from '@/components/task-manager/model/types';
-import { RootState } from '@/lib/redux/config/store';
+import { RootState } from '@/shared/lib/redux/config/store';
 import UICheckbox from '@/shared/ui/checkbox/checkbox';
 
 import { editTask } from '../../model/tasks-slice';

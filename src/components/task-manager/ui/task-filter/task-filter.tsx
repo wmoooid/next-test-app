@@ -3,7 +3,7 @@
 import { PinBottomIcon, PinTopIcon } from '@radix-ui/react-icons';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { RootState } from '@/lib/redux/config/store';
+import { RootState } from '@/shared/lib/redux/config/store';
 import UIToggle from '@/shared/ui/toggle/toggle';
 
 import { setFilter } from '../../model/filter-slice';

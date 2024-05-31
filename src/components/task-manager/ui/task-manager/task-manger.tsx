@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 
-import { RootState } from '@/lib/redux/config/store';
+import { RootState } from '@/shared/lib/redux/config/store';
 import UIPagination from '@/shared/ui/pagination/pagination';
 
 import { Task } from '../../model/types';

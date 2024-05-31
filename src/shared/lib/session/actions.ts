@@ -5,6 +5,8 @@ import { revalidatePath } from 'next/cache';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 
+import { BASE_ROUTE, LOGIN_ROUTE } from '@/shared/constants/routes';
+
 import { SessionData } from './lib';
 import { defaultSession, sessionOptions } from './lib';
 
@@ -32,9 +34,9 @@ export async function login(formData: FormData) {
         session.isAdmin = user.isAdmin;
         session.isLoggedIn = true;
         await session.save();
-        revalidatePath('/');
-        redirect('/');
+        revalidatePath(BASE_ROUTE);
+        redirect(BASE_ROUTE);
     } else {
-        redirect('/login?error=wrondCredentials');
+        redirect(LOGIN_ROUTE + '?error=wrondCredentials');
     }
 }
