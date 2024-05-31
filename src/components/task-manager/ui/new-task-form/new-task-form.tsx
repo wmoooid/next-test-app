@@ -19,7 +19,7 @@ function NewTaskForm({ onSubmit }: { onSubmit: () => void }) {
         const email = formData.get('task-email') as string;
         const text = formData.get('task-text') as string;
 
-        if (name && text && email) dispatch(createTask({ name, text, email }));
+        if (name && email) dispatch(createTask({ name, text, email }));
 
         onSubmit();
     };
@@ -30,18 +30,21 @@ function NewTaskForm({ onSubmit }: { onSubmit: () => void }) {
                 <strong className={styles.heading}>Создать новую задачу</strong>
 
                 <Form.Field className={styles.form_field} name='task-name'>
+                    <Form.Message className={styles.message_error} match='valueMissing'>
+                        Введите Название
+                    </Form.Message>
                     <Form.Message className={styles.message_error} match='tooShort'>
                         Название должно быть длиннее 3 символов
                     </Form.Message>
+                    <Form.Message className={styles.message_error} match='tooLong'>
+                        Название не должно быть длиннее 25 символов
+                    </Form.Message>
                     <Form.Control asChild>
-                        <input placeholder='Название' name='task-name' className={styles.input} type='text' required minLength={3} />
+                        <input placeholder='Название' name='task-name' className={styles.input} type='text' required minLength={3} maxLength={25} />
                     </Form.Control>
                 </Form.Field>
 
                 <Form.Field className={styles.form_field} name='task-email'>
-                    <Form.Message className={styles.message_error} match='valueMissing'>
-                        Введите Email
-                    </Form.Message>
                     <Form.Message className={styles.message_error} match='typeMismatch'>
                         Введите корректный Email
                     </Form.Message>

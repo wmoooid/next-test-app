@@ -8,4 +8,6 @@
 .input {
     height: 2.5rem;
     min-height: 2.5rem;
+    min-width: 5rem;
+    width: 0;
 }
