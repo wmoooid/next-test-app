@@ -16,15 +16,17 @@ export default function TaskManager() {
     const { taskList } = useSelector((state: RootState) => state.taskList);
     const [currentPage, setCurrentPage] = useState(0);
 
-    const paginatedTaskList = taskList.reduce((acc: Task[][], task, index) => {
-        if (index % 3 === 0) {
-            acc.push([task]);
-        } else {
-            acc[acc.length - 1].push(task);
-        }
+    const paginatedTaskList = taskList
+        .filter((task) => !task.isFiltered)
+        .reduce((acc: Task[][], task, index) => {
+            if (index % 3 === 0) {
+                acc.push([task]);
+            } else {
+                acc[acc.length - 1].push(task);
+            }
 
-        return acc;
-    }, []);
+            return acc;
+        }, []);
 
     const onPaginationClick = (page: number) => {
         setCurrentPage(page);
